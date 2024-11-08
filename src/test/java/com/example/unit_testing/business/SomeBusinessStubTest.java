@@ -5,11 +5,29 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//Setting multiple stubs can be hard, we can try then with mock
+
 class SomeDataServiceStub implements SomeDataService {
 
     @Override
     public int[] retrieveAllData() {
         return new int[] {1,2,3};
+    }
+}
+
+class SomeDataServiceStubEmpty implements SomeDataService {
+
+    @Override
+    public int[] retrieveAllData() {
+        return new int[] { };
+    }
+}
+
+class SomeDataServiceStubOneValue implements SomeDataService {
+
+    @Override
+    public int[] retrieveAllData() {
+        return new int[] {1};
     }
 }
 
@@ -32,8 +50,8 @@ class SomeBusinessStubTest {
     public void calculateSumUsingDataService_isEmpty(){
         //we declare the class component to test
         SomeBusinessImpl business = new SomeBusinessImpl();
-        business.setSomeDataService(new SomeDataServiceStub());
-        int actualResult = business.calculateSum(new int [] {});
+        business.setSomeDataService(new SomeDataServiceStubEmpty());
+        int actualResult = business.calculateSumUsingDataService();
         int expectedResult = 0;
         assertEquals(expectedResult, actualResult);
     }
@@ -42,12 +60,11 @@ class SomeBusinessStubTest {
     public void calculateSumUsingDataService_oneValue(){
         //we declare the class component to test
         SomeBusinessImpl business = new SomeBusinessImpl();
-        business.setSomeDataService(new SomeDataServiceStub());
-        int actualResult = business.calculateSum(new int [] {1});
+        business.setSomeDataService(new SomeDataServiceStubOneValue());
+        int actualResult = business.calculateSumUsingDataService();
         int expectedResult = 1;
         assertEquals(expectedResult, actualResult);
     }
-
 
 
 }
