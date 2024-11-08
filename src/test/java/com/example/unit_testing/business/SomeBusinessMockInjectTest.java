@@ -3,22 +3,32 @@ package com.example.unit_testing.business;
 import com.example.unit_testing.data.SomeDataService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//implementation using mockit mock instead of stub ...
-//for injected mocks check the Class-> SomeBusinessMockInjectTest
-class SomeBusinessMockTest {
+//implementation using mockit mock instead ,and injected mocks annotation
+//implementation of the example course was failing,solution was found here:
+//https://stackoverflow.com/questions/27065195/null-after-injectmocks
+@RunWith(MockitoJUnitRunner.class)
+class SomeBusinessMockInjectTest {
 
 
-    SomeBusinessImpl business = new SomeBusinessImpl();
-    SomeDataService dataServiceMock = mock(SomeDataService.class);//we need to create a mock from a service
+    @InjectMocks
+    SomeBusinessImpl business;
 
+    @Mock
+    SomeDataService dataServiceMock;//we simplify this
+
+    //test were failing after deleting this, solution was let ti and add it MockitoAnnotations
     @BeforeEach
-    public void before(){
-        business.setSomeDataService(dataServiceMock);
+    public void setup(){
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
