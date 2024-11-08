@@ -22,12 +22,9 @@ class SomeBusinessMockTest {
 
     @Test
     public void calculateSumUsingDataService_basic(){
-
         //we test directly by using mockito methods
         when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {1,2,3});
-        int actualResult = business.calculateSumUsingDataService();
-        int expectedResult = 6;
-        assertEquals(expectedResult, actualResult);
+        assertEquals(6, business.calculateSumUsingDataService());
     }
 
     //we can altern with another variations of expected results
@@ -36,17 +33,13 @@ class SomeBusinessMockTest {
     @Test
     public void calculateSumUsingDataService_isEmpty(){
         when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {});
-        int actualResult = business.calculateSumUsingDataService();
-        int expectedResult = 0;
-        assertEquals(expectedResult, actualResult);
+        assertEquals(0, business.calculateSumUsingDataService());
     }
 
     @Test
     public void calculateSumUsingDataService_oneValue(){
-        when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {1});
-        int actualResult = business.calculateSumUsingDataService();
-        int expectedResult = 1;
-        assertEquals(expectedResult, actualResult);
+        when(dataServiceMock.retrieveAllData()).thenReturn(new int[] {5});
+        assertEquals(5, business.calculateSumUsingDataService());
     }
 
 
