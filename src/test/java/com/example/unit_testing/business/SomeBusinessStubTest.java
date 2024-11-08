@@ -29,20 +29,20 @@ class SomeBusinessStubTest {
     //multiple scenarios
 
     @Test
-    public void calculateSum_isEmpty(){
+    public void calculateSumUsingDataService_isEmpty(){
         //we declare the class component to test
         SomeBusinessImpl business = new SomeBusinessImpl();
-        //quitando algunos numeros del arreglo de la funcion
+        business.setSomeDataService(new SomeDataServiceStub());
         int actualResult = business.calculateSum(new int [] {});
         int expectedResult = 0;
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
-    public void calculateSum_oneValue(){
+    public void calculateSumUsingDataService_oneValue(){
         //we declare the class component to test
         SomeBusinessImpl business = new SomeBusinessImpl();
-        //quitando algunos numeros del arreglo de la funcion
+        business.setSomeDataService(new SomeDataServiceStub());
         int actualResult = business.calculateSum(new int [] {1});
         int expectedResult = 1;
         assertEquals(expectedResult, actualResult);
