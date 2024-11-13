@@ -3,6 +3,7 @@ package com.example.unit_testing.business;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -85,8 +86,23 @@ public class ListMockTest {
         List<String> allValues = captor.getAllValues();
         assertEquals("SomeString1",allValues.get(0));
         assertEquals("SomeString2",allValues.get(1));
+    }
 
+    @Test
+    public void spying(){
+        //spy will store behavior of the mock code
 
+        ArrayList arrayListSpy = spy(ArrayList.class);
+        arrayListSpy.add("Test0");
+        System.out.println(arrayListSpy.get(0)); // Test0
+        System.out.println(arrayListSpy.size()); //1 bc has test0 element
+        arrayListSpy.add("Test");
+        arrayListSpy.add("Test2");
+
+        System.out.println(arrayListSpy.size()); //3 bc contains Test0, Test and Test2
+
+        when(arrayListSpy.size()).thenReturn(5);
+        System.out.println(arrayListSpy.size());//5
 
     }
 }
