@@ -5,13 +5,11 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.*;
 
 public class ListMockTest {
 
-    List mock = mock(List.class);
+    List<String> mock = mock(List.class);
 
     @Test
     public void size_basic(){
@@ -44,5 +42,23 @@ public class ListMockTest {
         when(mock.get(anyInt())).thenReturn("in28minutes");
         assertEquals("in28minutes",mock.get(0));
         assertEquals("in28minutes",mock.get(1));
+    }
+
+
+    @Test
+    public void verificationBasics(){
+        //for scenerios when value is not return back
+        //sut
+        String value = mock.get(0);
+
+        //verify
+        verify(mock).get(0);
+        verify(mock).get(anyInt());
+        //verify is call one time
+        verify(mock, times(1)).get(anyInt());
+        verify(mock, atLeast(1)).get(anyInt());
+        verify(mock, atMost(2)).get(anyInt());
+        verify(mock, never()).get(2);
+
     }
 }
