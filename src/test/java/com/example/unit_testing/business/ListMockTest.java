@@ -48,7 +48,7 @@ public class ListMockTest {
 
     @Test
     public void verificationBasics(){
-        //for scenerios when value is not return back
+        //for scenarios when value is not return back
         //sut
         String value = mock.get(0);
 
@@ -71,5 +71,22 @@ public class ListMockTest {
         verify(mock).add(captor.capture());
 
        assertEquals("SomeString",captor.getValue());
+    }
+
+    @Test
+    public void argumentCapturingMultipleTimes(){
+        //system under test
+        mock.add("SomeString1");//argument capture
+        mock.add("SomeString2");
+
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mock,times(2)).add(captor.capture());
+
+        List<String> allValues = captor.getAllValues();
+        assertEquals("SomeString1",allValues.get(0));
+        assertEquals("SomeString2",allValues.get(1));
+
+
+
     }
 }
