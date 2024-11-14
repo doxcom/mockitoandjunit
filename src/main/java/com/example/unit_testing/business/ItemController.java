@@ -10,7 +10,7 @@ public class ItemController {
 
 
     @Autowired
-    ItemBusinessService businessService;
+    private ItemBusinessService businessService;
     //restful service
 
     @GetMapping("/dummy-item")
