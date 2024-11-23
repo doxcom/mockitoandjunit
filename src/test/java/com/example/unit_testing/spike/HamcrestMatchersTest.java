@@ -1,6 +1,6 @@
 package com.example.unit_testing.spike;
 
-import org.assertj.core.internal.Integers;
+
 import org.junit.Test;
 
 import java.util.Arrays;
